@@ -1,16 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import "primereact/resources/themes/saga-green/theme.css";
+import MainCard from './MainCard'
 
-export default class Main extends React.PureComponent {
-  render() {
-    return (
-      <div>
-        <p>Main</p>
-        <br />
-        <nav>
-          <Link to="/about">About</Link>
-        </nav>
-      </div>
-    );
-  }
+export default function Main(props) {
+  return (
+    <MainCard
+      title="Личный кабинет клиента"
+      subtitle="Войдите или зарегистрируйтесь в личном кабинете. При регистрации укажите действующий номер телефона, на него будет направлен пароль через смс"
+    />
+  );
 }
