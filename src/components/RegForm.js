@@ -88,6 +88,8 @@ export function RegForm(props) {
         <span className="p-float-label">
           <Calendar
             id="birthdate"
+            dateFormat="dd.mm.yy"
+            mask="99/99/9999"
             monthNavigator
             yearNavigator
             yearRange="1900:2070"
