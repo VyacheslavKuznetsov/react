@@ -53,7 +53,7 @@ export function RegForm(props) {
   };
 
   return (
-    <Card title="Регистрация" style={{ width: "30rem", marginBottom: "2em" }}>
+    <Card title="Регистрация" >
       <form onSubmit={handleSubmit(onSubmit)}>
         <ReactDadataBox
           token="cb23c52aebca84540b30e05d2b1cfa0a2ef46b48"

@@ -28,7 +28,7 @@ export function AuthForm(props) {
   let password = watch("password");
 
   return (
-    <Card title="Аутентификация" style={{ width: "30rem", marginBottom: "2em" }}>
+    <Card title="Аутентификация">
       <form onSubmit={handleSubmit(onSubmit)}>
         <span className="p-float-label">
           <InputText id="phone" {...register("phone", {required: true})}></InputText>

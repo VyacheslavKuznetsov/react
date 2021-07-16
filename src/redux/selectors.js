@@ -1,0 +1,1 @@
+export const getUserInitials = (state) => state.userInitials;
