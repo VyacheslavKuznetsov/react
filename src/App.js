@@ -13,19 +13,19 @@ function App() {
     <div className="card">
       <Router history={history}>
         <Route path="/" exact>
-          <MainLayout url="/auth" />
+          <MainLayout url="auth" />
         </Route>
         <Route path="/auth/">
-          <MainLayout url="/auth" />
+          <MainLayout url="auth" />
         </Route>
         <Route path="/reg/">
-          <MainLayout url="/reg" />
+          <MainLayout url="reg" />
         </Route>
         <Route path="/issues/">
-          <MainLayout url="/issues" />
+          <MainLayout url="issues" />
         </Route>
-        <Route path="/comments/">
-          <MainLayout url="/comments" />
+        <Route path="/comments/:issue">
+          <MainLayout url="comments" />
         </Route>
       </Router>
     </div>

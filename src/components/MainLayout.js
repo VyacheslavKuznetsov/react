@@ -2,31 +2,35 @@ import { Card } from "primereact/card";
 import "primereact/resources/themes/saga-green/theme.css";
 import { TabPanel, TabView } from "primereact/tabview";
 import React, { useState } from "react";
+import { withRouter } from "react-router";
 import { AuthForm } from "./AuthForm";
-import { Comments } from "./Comments";
+import Comments from "./Comments";
 import { Issues } from "./Issues";
 import { RegForm } from "./RegForm";
-import { history } from "../App";
-import { withRouter } from "react-router";
 
-const mapUrlToProps = {
-  "/auth": {
-    index: 0,
-  },
-  "/reg": {
-    index: 1,
-  },
-  "/issues": {
-    index: 2,
-    isIssues: true,
-  },
-  "/comments": {
-    index: 2,
-    isIssues: false,
-  },
+const mapUrlToProps = (url, params) => {
+  switch (url) {
+    case "auth": return {
+      index: 0
+    }
+    case "reg": return {
+      index: 1
+    }
+    case "issues": return {
+      index: 2,
+      isIssues: true
+    }
+    case "comments":  return {
+      index: 2,
+      isIssues: false,
+      issueId: params.issue
+    }
+    default:
+      throw new Error(`Не обрабатываемый url '${url}'`);
+  }
 };
 
-const mapPropsToUrl = (activeIndex, isIssues) => {
+const mapPropsToUrl = (activeIndex, isIssues, issueId) => {
   switch (activeIndex) {
     case 0:
       return "/auth";
@@ -36,7 +40,7 @@ const mapPropsToUrl = (activeIndex, isIssues) => {
       if (isIssues || isIssues === undefined) {
         return "/issues";
       } else {
-        return "/comments";
+        return `/comments/${issueId}`;
       }
     }
     default: {
@@ -46,17 +50,15 @@ const mapPropsToUrl = (activeIndex, isIssues) => {
 };
 
 function MainLayout(props) {
-  let currentMap = mapUrlToProps[props.url];
-  if (currentMap === undefined) {
-    currentMap = mapUrlToProps["auth"];
-  }
+  const mapping = mapUrlToProps(props.url, props.match.params);
 
-  const [activeIndex, ] = useState(currentMap.index);
-  const [isIssues, ] = useState(currentMap.isIssues);
+  const [activeIndex] = useState(mapping.index);
+  const [isIssues] = useState(mapping.isIssues);
+  const [issueId] = useState(mapping.issueId);
 
   const handleTabChange = (e) => {
-    const url = mapPropsToUrl(e.index, isIssues);
-    history.push(url);
+    const url = mapPropsToUrl(e.index, isIssues, issueId);
+    props.history.push(url);
   };
 
   return (

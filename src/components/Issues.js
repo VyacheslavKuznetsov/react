@@ -21,7 +21,7 @@ const userTemplate = (rowData) => {
 
 const editTemplate = (rowData) => {
   return (
-    <NavLink to="/comments">
+    <NavLink to={{pathname: `/comments/${rowData.id}`, state: {url: rowData.btnEdit}}} >
       <Button icon="pi pi-pencil" />
     </NavLink>
   );
@@ -44,6 +44,7 @@ export const Issues = () => {
   useEffect(() => {
     const github = new GithubApi(GITHUB_LOGIN, GITHUB_TOKEN, GITHUB_PROJECT);
     github.getIssues().then((issues) => {
+      console.log(issues)
       setData(issues);
     });
   }, []);
