@@ -39,17 +39,20 @@ const mapPropsToUrl = (activeIndex, isIssues) => {
         return "/comments";
       }
     }
+    default: {
+      throw new Error("Необработанная вкладка");
+    }
   }
 };
 
 function MainLayout(props) {
-  const currentMap = mapUrlToProps[props.url];
+  let currentMap = mapUrlToProps[props.url];
   if (currentMap === undefined) {
     currentMap = mapUrlToProps["auth"];
   }
 
-  const [activeIndex, setActiveIndex] = useState(currentMap.index);
-  const [isIssues, setIssues] = useState(currentMap.isIssues);
+  const [activeIndex, ] = useState(currentMap.index);
+  const [isIssues, ] = useState(currentMap.isIssues);
 
   const handleTabChange = (e) => {
     const url = mapPropsToUrl(e.index, isIssues);

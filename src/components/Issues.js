@@ -6,13 +6,6 @@ import { NavLink } from "react-router-dom";
 import { GITHUB_LOGIN, GITHUB_PROJECT, GITHUB_TOKEN } from "../constants";
 import { GithubApi } from "./GithubApi";
 
-const getIssues = (data, setData) => () => {
-  const github = new GithubApi(GITHUB_LOGIN, GITHUB_TOKEN, GITHUB_PROJECT);
-  github.getIssues().then((issues) => {
-    setData(issues);
-  });
-};
-
 const userHRefClick = (e) => {
   e.preventDefault();
   window.open(e.target.href, "_blank");
@@ -48,7 +41,12 @@ const githubTemplate = (rowData) => {
 export const Issues = () => {
   const [data, setData] = useState([]);
 
-  useEffect(getIssues(data, setData), []);
+  useEffect(() => {
+    const github = new GithubApi(GITHUB_LOGIN, GITHUB_TOKEN, GITHUB_PROJECT);
+    github.getIssues().then((issues) => {
+      setData(issues);
+    });
+  }, []);
 
   return (
     <>

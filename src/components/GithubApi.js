@@ -18,10 +18,10 @@ export class GithubApi {
   }
   
   getIssues = () => {
-    const headers = {
-       Authorization: this.authHeader()
-    }
-    return axios.get(`${this.baseUrl}/issues`, {headers: headers})
+    // const headers = {
+    //    Authorization: this.authHeader()
+    // }
+    return axios.get(`${this.baseUrl}/issues` /*, {headers: headers} */)
       .then((resp) => {
         return resp.data.map((issue) => ({
           status: issue.state,
