@@ -29,10 +29,26 @@ export class GithubApi {
           title: issue.title,
           userLogin: issue.user.login,
           userUrl: issue.user.html_url,
-          btnEdit: issue.comments_url,
+          btnComments: issue.comments_url,
           btnGithub: issue.html_url,
         }));
       })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  postIssues = (title, description) => {
+    return axios
+      .post(`${this.baseUrl}/issues`, {title: title, body: description}, {headers: this.headers()})
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  patchIssues = (id, state) => {
+    return axios
+      .patch(`${this.baseUrl}/issues/${id}`, {state: state}, {headers: this.headers()})
       .catch((error) => {
         console.log(error);
       });
@@ -53,4 +69,14 @@ export class GithubApi {
         console.log(error);
       });
   }
+
+  postComments = (id, comment) => {
+    const url = `${this.baseUrl}/issues/${id}/comments`;
+    return axios
+      .post(url, {body: comment}, {headers: this.headers()})
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
 }
